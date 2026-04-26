@@ -23,7 +23,7 @@ body {
 /* Header */
 .header {
   padding: 0px 0;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -40,11 +40,13 @@ body {
   font-weight: 900;
   font-size: 24px;
 }
+
 .logo-img {
   width: 52px;
   height: 52px;
   object-fit: contain;
 }
+
 .titulo {
   display: flex;
   align-items: center;
@@ -58,6 +60,10 @@ body {
   align-items: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 .navbar a {
   text-decoration: none;
   color: var(--branco);
@@ -65,7 +71,9 @@ body {
   transition: 0.3s;
 }
 
-.navbar a:hover { color: var(--laranja); }
+.navbar a:hover {
+  color: var(--laranja);
+}
 
 .btn-login {
   border: 1px solid var(--laranja);
@@ -76,8 +84,9 @@ body {
 /* Banner / Hero */
 .banner {
   height: 80vh;
-  background: linear-gradient(to right, rgba(0,0,0,0.9), transparent), 
-              url('../assets/imgs/Kobebackgroudhome.gif'); /* Ou sua imagem de fundo */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), transparent),
+    url('../assets/imgs/Kobebackgroudhome.gif');
+  /* Ou sua imagem de fundo */
   background-size: cover;
   display: flex;
   align-items: center;
@@ -89,7 +98,9 @@ body {
   margin-bottom: 20px;
 }
 
-.highlight { color: var(--laranja); }
+.highlight {
+  color: var(--laranja);
+}
 
 .hero-text p {
   width: 500px;
@@ -97,7 +108,10 @@ body {
   margin-bottom: 30px;
 }
 
-.hero-btns { display: flex; gap: 15px; }
+.hero-btns {
+  display: flex;
+  gap: 15px;
+}
 
 .btn-primary {
   background-color: var(--laranja);
@@ -144,8 +158,16 @@ body {
   font-size: 24px;
 }
 
-.feature-content h4 { margin: 0 0 5px 0; font-size: 16px; }
-.feature-content p { margin: 0; font-size: 12px; color: var(--cinza-texto); }
+.feature-content h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.feature-content p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--cinza-texto);
+}
 
 /* Como Funciona */
 .how-it-works {
@@ -153,8 +175,16 @@ body {
   text-align: center;
 }
 
-.section-subtitle { color: var(--laranja); letter-spacing: 2px; font-size: 14px; }
-.section-title { font-size: 32px; margin-bottom: 60px; }
+.section-subtitle {
+  color: var(--laranja);
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 60px;
+}
 
 .steps-container {
   display: flex;
@@ -163,11 +193,15 @@ body {
   gap: 40px;
 }
 
-.step { width: 250px; position: relative; }
+.step {
+  width: 250px;
+  position: relative;
+}
+
 .step-number {
   font-size: 80px;
   font-weight: 900;
-  color: rgba(255,255,255,0.05);
+  color: rgba(255, 255, 255, 0.05);
   position: absolute;
   top: -40px;
   left: 0;
@@ -184,10 +218,16 @@ body {
   margin: 0 auto 20px;
 }
 
-.arrow { font-size: 30px; color: var(--laranja); }
+.arrow {
+  font-size: 30px;
+  color: var(--laranja);
+}
 
 /* CTA Final */
-.final-cta { padding-bottom: 100px; }
+.final-cta {
+  padding-bottom: 100px;
+}
+
 .cta-box {
   background: var(--cinza-card);
   border: 1px solid #333;
@@ -198,8 +238,13 @@ body {
   align-items: center;
 }
 
-.cta-content { width: 50%; }
-.cta-action { width: 40%; }
+.cta-content {
+  width: 50%;
+}
+
+.cta-action {
+  width: 40%;
+}
 
 /* Footer Dark */
 .footer-dark {
@@ -213,7 +258,10 @@ body {
   justify-content: center;
 }
 
-.orange { color: var(--laranja); }
+.orange {
+  color: var(--laranja);
+}
+
 .copyright {
   text-align: center;
   margin-top: 50px;
