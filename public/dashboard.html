@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrangeBall | Dashboard</title>
+    <link rel="stylesheet" href="css/dashboards.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-sidebar">
+            <img src="assets/imgs/LogoOrangeballNova.png" alt="Logo">
+            <h2>ORANGEBALL</h2>
+        </div>
+
+        <ul class="menu">
+            <li><a href="#" class="menu-item active" onclick="mostrarSecao('dashboard')">
+                <span class="icon">📊</span> Dashboard
+            </a></li>
+            <li><a href="#" class="menu-item" onclick="mostrarSecao('adicionar-treino')">
+                <span class="icon">🏀</span> Adicionar Treino
+            </a></li>
+            <li><a href="#" class="menu-item" onclick="mostrarSecao('adicionar-jogo')">
+                <span class="icon">🎯</span> Adicionar Jogo
+            </a></li>
+            <li><a href="#" class="menu-item" onclick="mostrarSecao('galeria')">
+                <span class="icon">📸</span> Galeria de Fotos
+            </a></li>
+            <li><a href="#" class="menu-item" onclick="mostrarSecao('calendario')">
+                <span class="icon">📅</span> Calendário
+            </a></li>
+            <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
+                <span class="icon">📋</span> Histórico
+            </a></li>
+        </ul>
+
+        <div class="perfil-usuario">
+            <div class="avatar">👤</div>
+            <div class="info-usuario">
+                <p class="nome-usuario">Jogador</p>
+                <a href="index.html" class="btn-sair">Sair</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="conteudo-principal">
+
+        <!-- HEADER -->
+        <div class="header-dashboard">
+            <div class="titulo-pagina">
+                <h1 id="titulo-secao">Dashboard</h1>
+                <p id="subtitulo-secao">Visão geral do seu desempenho</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-rapido" onclick="mostrarSecao('adicionar-treino')">➕ Novo Treino</button>
+                <button class="btn-rapido btn-secundario" onclick="mostrarSecao('adicionar-jogo')">🎯 Novo Jogo</button>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 1: DASHBOARD (GRÁFICOS) -->
+        <!-- ========================================== -->
+        <div id="secao-dashboard" class="secao ativa">
+            
+            <div class="cards-resumo">
+                <div class="card-stat">
+                    <div class="icon-stat">🏀</div>
+                    <div class="info-stat">
+                        <p class="label-stat">Treinos este mês</p>
+                        <h2 class="numero-stat">0</h2>
+                    </div>
+                </div>
+                <div class="card-stat">
+                    <div class="icon-stat">🎯</div>
+                    <div class="info-stat">
+                        <p class="label-stat">Jogos disputados</p>
+                        <h2 class="numero-stat">0</h2>
+                    </div>
+                </div>
+                <div class="card-stat">
+                    <div class="icon-stat">⭐</div>
+                    <div class="info-stat">
+                        <p class="label-stat">Média de pontos</p>
+                        <h2 class="numero-stat">0.0</h2>
+                    </div>
+                </div>
+                <div class="card-stat">
+                    <div class="icon-stat">📈</div>
+                    <div class="info-stat">
+                        <p class="label-stat">Evolução</p>
+                        <h2 class="numero-stat">+0%</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graficos-container">
+                <div class="card-grafico">
+                    <h3>Desempenho nos Treinos</h3>
+                    <canvas id="graficoTreinos"></canvas>
+                </div>
+                <div class="card-grafico">
+                    <h3>Pontos por Jogo</h3>
+                    <canvas id="graficoPontos"></canvas>
+                </div>
+            </div>
+
+            <div class="graficos-container">
+                <div class="card-grafico full-width">
+                    <h3>Evolução Mensal</h3>
+                    <canvas id="graficoEvolucao"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 2: ADICIONAR TREINO -->
+        <!-- ========================================== -->
+        <div id="secao-adicionar-treino" class="secao">
+            
+            <div class="card-formulario">
+                <h2>📝 Registrar Treino</h2>
+                
+                <form class="formulario-treino">
+                    <div class="form-group">
+                        <label>Data do Treino</label>
+                        <input type="date" id="data_treino" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Duração (minutos)</label>
+                            <input type="number" id="duracao_treino" placeholder="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Treino</label>
+                            <select id="tipo_treino">
+                                <option>Arremesso</option>
+                                <option>Drible</option>
+                                <option>Físico</option>
+                                <option>Tático</option>
+                                <option>Completo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Arremessos tentados</label>
+                            <input type="number" id="arremessos_tentados" placeholder="50">
+                        </div>
+                        <div class="form-group">
+                            <label>Arremessos convertidos</label>
+                            <input type="number" id="arremessos_convertidos" placeholder="30">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea id="observacoes_treino" rows="4" placeholder="Como foi o treino?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">✅ Salvar Treino</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 3: ADICIONAR JOGO -->
+        <!-- ========================================== -->
+        <div id="secao-adicionar-jogo" class="secao">
+            
+            <div class="card-formulario">
+                <h2>🎯 Registrar Jogo</h2>
+                
+                <form class="formulario-jogo">
+                    <div class="form-group">
+                        <label>Data do Jogo</label>
+                        <input type="date" id="data_jogo" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Adversário</label>
+                            <input type="text" id="adversario" placeholder="Nome do time adversário">
+                        </div>
+                        <div class="form-group">
+                            <label>Resultado</label>
+                            <select id="resultado_jogo">
+                                <option>Vitória</option>
+                                <option>Derrota</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="stats-jogo">
+                        <h3>📊 Estatísticas do Jogo</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Pontos</label>
+                                <input type="number" id="pontos_jogo" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Rebotes</label>
+                                <input type="number" id="rebotes_jogo" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Assistências</label>
+                                <input type="number" id="assistencias_jogo" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Roubos de bola</label>
+                                <input type="number" id="roubos_jogo" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Bloqueios</label>
+                                <input type="number" id="bloqueios_jogo" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label>Minutos jogados</label>
+                                <input type="number" id="minutos_jogo" placeholder="32">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea id="observacoes_jogo" rows="4" placeholder="Como foi sua performance?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">✅ Salvar Jogo</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 4: GALERIA DE FOTOS -->
+        <!-- ========================================== -->
+        <div id="secao-galeria" class="secao">
+            
+            <div class="card-formulario">
+                <h2>📸 Adicionar Foto</h2>
+                
+                <form class="formulario-foto">
+                    <div class="upload-area" onclick="document.getElementById('input_foto').click()">
+                        <div class="upload-icon">📷</div>
+                        <p>Clique para selecionar uma foto</p>
+                        <input type="file" id="input_foto" accept="image/*" style="display:none">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição da Foto</label>
+                        <textarea id="descricao_foto" rows="3" placeholder="Ex: Treino de arremesso - 20/01/2026"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">💾 Salvar Foto</button>
+                </form>
+            </div>
+
+            <div class="galeria-fotos" id="galeria_fotos">
+                <p class="mensagem-vazio">Nenhuma foto adicionada ainda</p>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 5: CALENDÁRIO -->
+        <!-- ========================================== -->
+        <div id="secao-calendario" class="secao">
+            
+            <div class="calendario-container">
+                <div class="calendario-header">
+                    <button class="btn-mes" onclick="mudarMes(-1)">‹</button>
+                    <h2 id="mes-ano">Janeiro 2026</h2>
+                    <button class="btn-mes" onclick="mudarMes(1)">›</button>
+                </div>
+
+                <div class="calendario-grid" id="calendario">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+
+                <div class="legenda-calendario">
+                    <div class="item-legenda">
+                        <span class="marcador treino"></span> Treino
+                    </div>
+                    <div class="item-legenda">
+                        <span class="marcador jogo"></span> Jogo
+                    </div>
+                    <div class="item-legenda">
+                        <span class="marcador foto"></span> Foto
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SEÇÃO 6: HISTÓRICO -->
+        <!-- ========================================== -->
+        <div id="secao-historico" class="secao">
+            
+            <div class="filtros-historico">
+                <select id="filtro_tipo">
+                    <option value="">Todos</option>
+                    <option value="treino">Treinos</option>
+                    <option value="jogo">Jogos</option>
+                </select>
+                <input type="month" id="filtro_mes">
+            </div>
+
+            <div class="lista-historico" id="lista_historico">
+                <p class="mensagem-vazio">Nenhum registro encontrado</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="./js/dashboard.js"></script>
+</body>
+</html>
