@@ -84,14 +84,32 @@
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
-        if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
-            return false;
+        // Loop for com vetor para validar campos
+        const campos = [
+            { valor: emailVar, nome: "E-mail" },
+            { valor: senhaVar, nome: "Senha" }
+        ];
+
+        // Loop para verificar cada campo
+        for (let i = 0; i < campos.length; i++) {
+            if (campos[i].valor == "") {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = `Preencha o campo ${campos[i].nome}!`;
+                finalizarAguardar();
+                return false;
+            }
         }
-        else {
-            setInterval(sumirMensagem, 5000)
+
+        // Loop for...of para validar domínio do e-mail
+        const dominiosPermitidos = ["gmail.com", "hotmail.com", "outlook.com"];
+        const emailDigitado = emailVar.split("@")[1];
+        
+        let dominioValido = false;
+        for (const dominio of dominiosPermitidos) {
+            if (emailDigitado === dominio) {
+                dominioValido = true;
+                break;
+            }
         }
 
         console.log("FORM LOGIN: ", emailVar);
