@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrangeBall | Dashboard</title>
-    <link rel="stylesheet" href="css/dashboards.css">
+    <link rel="stylesheet" href="css/calendario.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
     <!-- SIDEBAR -->
@@ -17,13 +19,12 @@
         </div>
 
         <ul class="menu">
-            <li><a href="#" class="menu-item active" onclick="mostrarSecao('dashboard')">
-                <span class="icon">📊</span> Dashboard
-            </a></li>
-            <li><a href="calendario.html" class="menu-item" onclick="mostrarSecao('calendario')">
-                <span class="icon">📅</span> Calendário
-            </a></li>
-            
+            <li><a href="calendario.html" class="menu-item active" onclick="mostrarSecao('calendario')">
+                    <span class="icon">📅</span> Calendário
+                </a></li>
+            <li><a href="dashboard.html" class="menu-item " onclick="mostrarSecao('dashboard')">
+                    <span class="icon">📊</span> Dashboard
+                </a></li>
             <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('adicionar-treino')">
                 <span class="icon">🏀</span> Adicionar Treino
             </a></li>
@@ -31,9 +32,9 @@
                 <span class="icon">🎯</span> Adicionar Jogo
             </a></li> -->
             <li><a href="#" class="menu-item" onclick="mostrarSecao('galeria')">
-                <span class="icon">📸</span> Galeria de Fotos
-            </a></li>
-            
+                    <span class="icon">📸</span> Sua Galeria de Fotos
+                </a></li>
+
             <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
                 <span class="icon">📋</span> Histórico
             </a></li> -->
@@ -54,79 +55,130 @@
         <!-- HEADER -->
         <div class="header-dashboard">
             <div class="titulo-pagina">
-                <h1 id="titulo-secao">Dashboard</h1>
-                <p id="subtitulo-secao">Visão geral do seu desempenho</p>
+                <h1 id="titulo-secao">Calendario</h1>
+                <p id="subtitulo-secao">Aqui você pode relembrar todos os seus momentos e stats!!!</p>
             </div>
             <div class="header-actions">
-                <button class="btn-rapido" onclick="mostrarSecao('adicionar-treino')">➕ Novo Treino</button>
-                <button class="btn-rapido btn-secundario" onclick="mostrarSecao('adicionar-jogo')">🎯 Novo Jogo</button>
+                <h1 id="titulo-secao">Mês do ano:</h1>
+                <select class="select_ano" id="mes-ano" name="Mês do ano">
+                    <option class="options_ano" value="janeiro">📅 Janeiro</option>
+                    <option value="fevereiro">📅 Fevereiro</option>
+                    <option value="marco">📅 Março</option>
+                    <option value="abril">📅 Abril</option>
+                    <option value="maio">📅 Maio</option>
+                    <option value="junho">📅 Junho</option>
+                    <option value="julho">📅 Julho</option>
+                    <option value="agosto">📅 Agosto</option>
+                    <option value="setembro">📅 Setembro</option>
+                    <option value="outubro">📅 Outubro</option>
+                    <option value="novembro">📅 Novembro</option>
+                    <option value="dezembro">📅 Dezembro</option>
+                </select>
+
+
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- SEÇÃO 1: DASHBOARD (GRÁFICOS) -->
+        <!-- SEÇÃO 1: calendario -->
         <!-- ========================================== -->
-        <div id="secao-dashboard" class="secao ativa">
-            
-            <div class="cards-resumo">
-                <div class="card-stat">
-                    <div class="icon-stat">🏀</div>
-                    <div class="info-stat">
-                        <p class="label-stat">Treinos este mês</p>
-                        <h2 class="numero-stat">0</h2>
-                    </div>
-                </div>
-                <div class="card-stat">
-                    <div class="icon-stat">🎯</div>
-                    <div class="info-stat">
-                        <p class="label-stat">Jogos disputados</p>
-                        <h2 class="numero-stat">0</h2>
-                    </div>
-                </div>
-                <div class="card-stat">
-                    <div class="icon-stat">⭐</div>
-                    <div class="info-stat">
-                        <p class="label-stat">Média de pontos</p>
-                        <h2 class="numero-stat">0.0</h2>
-                    </div>
-                </div>
-                <div class="card-stat">
-                    <div class="icon-stat">📈</div>
-                    <div class="info-stat">
-                        <p class="label-stat">Evolução</p>
-                        <h2 class="numero-stat">+0%</h2>
-                    </div>
-                </div>
+        <div class="calendario">
+            <h2>Maio 2026</h2><br><br>
+
+            <div class="dias-semana">
+                <div>Dom</div>
+                <div>Seg</div>
+                <div>Ter</div>
+                <div>Qua</div>
+                <div>Qui</div>
+                <div>Sex</div>
+                <div>Sáb</div>
             </div>
 
-            <div class="graficos-container">
-                <div class="card-grafico">
-                    <h3>Desempenho nos Treinos</h3>
-                    <canvas id="graficoTreinos"></canvas>
-                </div>
-                <div class="card-grafico">
-                    <h3>Pontos por Jogo</h3>
-                    <canvas id="graficoPontos"></canvas>
-                </div>
-            </div>
+            <div class="dias">
+                <button class="dia_button expandido"></button>
+                <button class="dia_button expandido"></button>
+                <button class="dia_button expandido"></button>
+                <button class="dia_button expandido"></button>
 
-            <div class="graficos-container">
-                <div class="card-grafico full-width">
-                    <h3>Evolução Mensal</h3>
-                    <canvas id="graficoEvolucao"></canvas>
-                </div>
-            </div>
+                <button onclick="teladiacalendario(1, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">1</span></button>
+                <button onclick="teladiacalendario(2, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">2</span></button>
+                <button onclick="teladiacalendario(3, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">3</span></button>
+                <button onclick="teladiacalendario(4, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">4</span></button>
+                <button onclick="teladiacalendario(5, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">5</span></button>
+                <button onclick="teladiacalendario(6, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">6</span></button>
+                <button onclick="teladiacalendario(7, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">7</span></button>
+                <button onclick="teladiacalendario(8, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">8</span></button>
+                <button onclick="teladiacalendario(9, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">9</span></button>
+                <button onclick="teladiacalendario(10, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">10</span></button>
+                <button onclick="teladiacalendario(11, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">11</span></button>
+                <button onclick="teladiacalendario(12, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">12</span></button>
+                <button onclick="teladiacalendario(13, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">13</span></button>
+                <button onclick="teladiacalendario(14, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">14</span></button>
+                <button onclick="teladiacalendario(15, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">15</span></button>
+                <button onclick="teladiacalendario(16, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">16</span></button>
+                <button onclick="teladiacalendario(17, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">17</span></button>
+                <button onclick="teladiacalendario(18, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">18</span></button>
+                <button onclick="teladiacalendario(19, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">19</span></button>
+                <button onclick="teladiacalendario(20, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">20</span></button>
+                <button onclick="teladiacalendario(21, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">21</span></button>
+                <button onclick="teladiacalendario(22, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">22</span></button>
+                <button onclick="teladiacalendario(23, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">23</span></button>
+                <button onclick="teladiacalendario(24, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">24</span></button>
+                <button onclick="teladiacalendario(25, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">25</span></button>
+                <button onclick="teladiacalendario(26, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">26</span></button>
+                <button onclick="teladiacalendario(27, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">27</span></button>
+                <button onclick="teladiacalendario(28, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">28</span></button>
+                <button onclick="teladiacalendario(29, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">29</span></button>
+                <button onclick="teladiacalendario(30, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">30</span></button>
+                <button onclick="teladiacalendario(31, 5, 2026)" class="dia_button expandido"><span
+                        class="numero">31</span></button>
 
+
+
+
+            </div>
         </div>
+
 
         <!-- ========================================== -->
         <!-- SEÇÃO 2: ADICIONAR TREINO -->
         <!-- ========================================== -->
         <div id="secao-adicionar-treino" class="secao">
-            
+
             <div class="card-formulario">
                 <h2>📝 Registrar Treino</h2>
-                
+
                 <form class="formulario-treino">
                     <div class="form-group">
                         <label>Data do Treino</label>
@@ -176,10 +228,10 @@
         <!-- SEÇÃO 3: ADICIONAR JOGO -->
         <!-- ========================================== -->
         <div id="secao-adicionar-jogo" class="secao">
-            
+
             <div class="card-formulario">
                 <h2>🎯 Registrar Jogo</h2>
-                
+
                 <form class="formulario-jogo">
                     <div class="form-group">
                         <label>Data do Jogo</label>
@@ -202,7 +254,7 @@
 
                     <div class="stats-jogo">
                         <h3>📊 Estatísticas do Jogo</h3>
-                        
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Pontos</label>
@@ -249,10 +301,10 @@
         <!-- SEÇÃO 4: GALERIA DE FOTOS -->
         <!-- ========================================== -->
         <div id="secao-galeria" class="secao">
-            
+
             <div class="card-formulario">
                 <h2>📸 Adicionar Foto</h2>
-                
+
                 <form class="formulario-foto">
                     <div class="upload-area" onclick="document.getElementById('input_foto').click()">
                         <div class="upload-icon">📷</div>
@@ -262,7 +314,8 @@
 
                     <div class="form-group">
                         <label>Descrição da Foto</label>
-                        <textarea id="descricao_foto" rows="3" placeholder="Ex: Treino de arremesso - 20/01/2026"></textarea>
+                        <textarea id="descricao_foto" rows="3"
+                            placeholder="Ex: Treino de arremesso - 20/01/2026"></textarea>
                     </div>
 
                     <button type="submit" class="btn-submit">💾 Salvar Foto</button>
@@ -279,7 +332,7 @@
         <!-- SEÇÃO 5: CALENDÁRIO -->
         <!-- ========================================== -->
         <div id="secao-calendario" class="secao">
-            
+
             <div class="calendario-container">
                 <div class="calendario-header">
                     <button class="btn-mes" onclick="mudarMes(-1)">‹</button>
@@ -288,7 +341,7 @@
                 </div>
 
                 <div class="calendario-grid" id="calendario">
-                
+
                 </div>
 
                 <div class="legenda-calendario">
@@ -310,7 +363,7 @@
         <!-- SEÇÃO 6: HISTÓRICO -->
         <!-- ========================================== -->
         <div id="secao-historico" class="secao">
-            
+
             <div class="filtros-historico">
                 <select id="filtro_tipo">
                     <option value="">Todos</option>
@@ -329,5 +382,16 @@
     </div>
 
     <script src="./js/dashboard.js"></script>
+    <script>
+        function teladiacalendario(dia, mes, ano) {
+            // fazer uma função que compare o dia, ano e mes quem foi selecionado com algum do banco de dados
+
+
+
+
+
+        }
+    </script>
 </body>
+
 </html>
