@@ -191,7 +191,7 @@ body {
   font-size: 40px;
 
   margin-top: 30px;
-  margin-left: 30px;
+  margin-left: 10px;
 
   position: relative;
   overflow: hidden;
@@ -248,17 +248,15 @@ body {
 .dia_button:hover .video_fundo{
   opacity:1;
 }
-.numero{
-  position:relative;
-  z-index:2;
-}
+
+
 
 .dias-semana,
 
 .dias {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 10px;
 }
 
 .dias-semana div {

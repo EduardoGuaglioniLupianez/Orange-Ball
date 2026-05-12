@@ -59,8 +59,21 @@
                 <p id="subtitulo-secao">Aqui você pode relembrar todos os seus momentos e stats!!!</p>
             </div>
             <div class="header-actions">
-                <h1 id="titulo-secao">Mês do ano:</h1>
-                <select class="select_ano" id="mes-ano" name="Mês do ano">
+                <h1 id="titulo-secao">Ano :</h1>
+                <select class="select_ano" id="id_ano" name="Mês do ano">
+                    <option class="options_ano" value="2020">📅 2020</option>
+                    <option value="2021">📅 2021</option>
+                    <option value="2022">📅 2022</option>
+                    <option value="2023">📅 2023</option>
+                    <option value="2024">📅 2024</option>
+                    <option value="2025">📅 2025</option>
+                    <option value="2026">📅 2026</option>
+                    <option value="2027">📅 2027</option>
+                </select>
+            </div>
+            <div class="header-actions">
+                <h1 id="titulo-secao">Mês :</h1>
+                <select class="select_ano" id="id_mes" name="Mês do ano">
                     <option class="options_ano" value="janeiro">📅 Janeiro</option>
                     <option value="fevereiro">📅 Fevereiro</option>
                     <option value="marco">📅 Março</option>
@@ -74,8 +87,6 @@
                     <option value="novembro">📅 Novembro</option>
                     <option value="dezembro">📅 Dezembro</option>
                 </select>
-
-
             </div>
         </div>
 
@@ -95,7 +106,7 @@
                 <div>Sáb</div>
             </div>
 
-            <div class="dias">
+            <div id="class="dias">
                 <button class="dia_button expandido"></button>
                 <button class="dia_button expandido"></button>
                 <button class="dia_button expandido"></button>
@@ -382,16 +393,6 @@
     </div>
 
     <script src="./js/dashboard.js"></script>
-    <script>
-        function teladiacalendario(dia, mes, ano) {
-            // fazer uma função que compare o dia, ano e mes quem foi selecionado com algum do banco de dados
-
-
-
-
-
-        }
-    </script>
 </body>
 
 </html>
