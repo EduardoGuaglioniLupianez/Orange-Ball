@@ -178,6 +178,31 @@ body {
   
   
 }
+.dia_sem_nada{
+  background-color: #ff6b35;
+
+  border-radius: 30px;
+  border: 1px;
+
+  padding: 40px;
+
+
+
+  font-size: 40px;
+
+  margin-top: 30px;
+  margin-left: 10px;
+
+  position: relative;
+  overflow: hidden;
+
+  width: 120px;
+  height: 120px;
+
+
+
+
+}
 .dia_button{
   background-color: #ff6b35;
 
@@ -216,14 +241,34 @@ body {
 }
 .dia_button:hover{
 
-  background-color: white;
+  background-image: url('../assets/imgs/Kobebackgroudhome.gif');
 
   transform: scale(1.05);
 
   animation: expandir 0.5s forwards;
 
+  font-size: 0;
+
   animation-delay: 1s;
+
+  
 }
+
+
+  
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
 .video_fundo{
 
   position:absolute;
@@ -261,7 +306,15 @@ body {
 
 .dias-semana div {
   font-weight: bold;
-  text-align: center;
+  text-align: flex;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-left: 40px;
+  
+  
+
 }
 
 .dias div {
@@ -275,12 +328,7 @@ body {
 .hoje {
   background-color: lightblue;
 }
-.expandido{
 
-
-
-
-}
 
 .header-actions {
   display: flex;

@@ -7,9 +7,13 @@
     <title>OrangeBall | Dashboard</title>
     <link rel="stylesheet" href="css/calendario.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/calendario.js"></script>
 </head>
 
-<body>
+<body onload="verificar_ano_mes(),
+verificar_ano_bissexto(), 
+verificar_dia_semana_comeca(), 
+gerar_calendario()">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -71,6 +75,7 @@
                     <option value="2027">📅 2027</option>
                 </select>
             </div>
+        
             <div class="header-actions">
                 <h1 id="titulo-secao">Mês :</h1>
                 <select class="select_ano" id="id_mes" name="Mês do ano">
@@ -106,11 +111,11 @@
                 <div>Sáb</div>
             </div>
 
-            <div id="class="dias">
-                <button class="dia_button expandido"></button>
-                <button class="dia_button expandido"></button>
-                <button class="dia_button expandido"></button>
-                <button class="dia_button expandido"></button>
+            <div id="id_dias" class="dias">
+                <!-- <button class="dia_sem_nada expandido"></button>
+                <button class="dia_sem_nada expandido"></button>
+                <button class="dia_sem_nada expandido"></button>
+                <button class="dia_sem_nada expandido"></button>
 
                 <button onclick="teladiacalendario(1, 5, 2026)" class="dia_button expandido"><span
                         class="numero">1</span></button>
@@ -175,7 +180,7 @@
                 <button onclick="teladiacalendario(31, 5, 2026)" class="dia_button expandido"><span
                         class="numero">31</span></button>
 
-
+ -->
 
 
             </div>
@@ -392,7 +397,7 @@
 
     </div>
 
-    <script src="./js/dashboard.js"></script>
+
 </body>
 
 </html>
