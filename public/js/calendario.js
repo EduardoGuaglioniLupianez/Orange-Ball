@@ -47,7 +47,7 @@ function verificar_ano_mes() {
 function verificar_ano_bissexto() {
     let bissexto = false
     let final_esperado = "00"
-    console.log(`o ano dentro da funcção do bisexto é ${ano}`)
+    console.log(`o ano dentro da função do bisexto é ${ano}`)
     if (ano % 4 == 0) {
         if (toString(ano).endsWith(final_esperado)) {
             if (ano % 400 == 0) {
