@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrangeBall | Dashboard</title>
+    <link rel="stylesheet" href="css/calendario.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/calendario.js"></script>
+</head>
+
+<body onload="verificar_ano_mes(),
+verificar_ano_bissexto(), 
+gerar_calendario()">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-sidebar">
+            <img src="assets/imgs/LogoOrangeballNova.png" alt="Logo">
+            <h2>ORANGEBALL</h2>
+        </div>
+
+        <ul class="menu">
+            <li><a href="adicionar_jogo.html" class="menu-item active" onclick="mostrarSecao('adicionar-jogo')">
+                    <span class="icon">🎯</span> Adicionar Jogo
+                </a></li>
+            <li><a href="calendario.html" class="menu-item " onclick="mostrarSecao('calendario')">
+                    <span class="icon">📅</span> Calendário
+                </a></li>
+            <li><a href="dashboard.html" class="menu-item " onclick="mostrarSecao('dashboard')">
+                    <span class="icon">📊</span> Dashboard
+                </a></li>
+
+            <li><a href="galeria_fotos.html" class="menu-item" onclick="mostrarSecao('galeria')">
+                    <span class="icon">📸</span> Galeria de Fotos
+                </a></li>
+
+            <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
+                <span class="icon">📋</span> Histórico
+            </a></li> -->
+        </ul>
+
+        <div class="perfil-usuario">
+            <div class="avatar">👤</div>
+            <div class="info-usuario">
+                <p class="nome-usuario">Jogador</p>
+                <a href="index.html" class="btn-sair">Sair</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="conteudo-principal">
+
+        <!-- HEADER -->
+        <div class="header-dashboard">
+            <div class="titulo-pagina">
+                <h1 id="titulo-secao">Adicionar Jogo🎯</h1>
+                <p id="subtitulo-secao">Aqui você pode adicionar suas stats e imagens do seu dia!</p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+</body>
+
+</html>
