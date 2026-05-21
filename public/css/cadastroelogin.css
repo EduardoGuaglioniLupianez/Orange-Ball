@@ -92,7 +92,7 @@ body {
 .logo {
   margin-top: 9px;
 
-  width: 15%;
+  width: 100%;
   /* Diminui a largura pela metade do container */
 
   height: auto;

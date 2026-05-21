@@ -10,9 +10,7 @@
     <script src="js/calendario.js"></script>
 </head>
 
-<body onload="verificar_ano_mes(),
-verificar_ano_bissexto(), 
-gerar_calendario()">
+<body>
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -44,7 +42,7 @@ gerar_calendario()">
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
             <div class="info-usuario">
-                <p class="nome-usuario">Jogador</p>
+                <p class="nome-usuario" id="p_nome">Jogador</p>
                 <a href="index.html" class="btn-sair">Sair</a>
             </div>
         </div>
@@ -60,6 +58,22 @@ gerar_calendario()">
                 <p id="subtitulo-secao">Aqui você pode adicionar suas stats e imagens do seu dia!</p>
             </div>
         </div>
+        <div>
+            <input type="text" id="id_pts" placeholder="pts">
+            <input type="text" id="id_ass" placeholder="ass">
+            <input type="text" id="id_reb" placeholder="reb">
+            <input type="text" id="id_tentativas" placeholder="tentativas">
+            <input type="text" id="id_acertos" placeholder="acertos"><br><br>
+            <div id="mensagem_erro"></div>
+
+            <button onclick="inserir_stats()">POSTAR</button>
+
+
+
+
+
+
+        </div>
 
 
 
@@ -73,5 +87,80 @@ gerar_calendario()">
 
 
 </body>
+<script>
+    p_nome.innerHTML= sessionStorage.NOME_USUARIO
+
+    function inserir_stats() {
+        var pts = id_pts.value;
+        var ass = id_ass.value;
+        var reb = id_reb.value;
+        var tentativas = id_tentativas.value;
+        var acertos = id_acertos.value;
+        var idsessao = sessionStorage.ID_USUARIO;
+        if (
+            pts == "" ||
+            ass == "" ||
+            reb == "" ||
+            tentativas == "" ||
+            acertos == ""
+        ) {
+            
+            mensagem_erro.innerHTML =
+                "Algum campo está vazio tente novamente";
+            return false;
+        } 
+        // Enviando o valor da nova input
+        fetch("/stats/inserstats", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                ptsServer: pts,
+                assServer: ass,
+                rebServer: reb,
+                tentativasServer: tentativas,
+                acertosServer: acertos,
+                fkUsuarioServer: idsessao
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+
+                    setTimeout(() => {
+                        window.location = "adicionar_jogo.html";
+                    }, "2000");
+
+                  
+                } else {
+                    throw "Houve um erro ao tentar realizar o insert";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+</script>
 
 </html>
