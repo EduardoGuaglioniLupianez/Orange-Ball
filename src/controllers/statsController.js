@@ -30,9 +30,9 @@ function inserstats(req, res) {
 
         statsModel.inserir(pts, ass, reb, tentativas, acertos, fk_usuario)
             .then(
-                function (resultadoInserir) {
-                    console.log(`\nResultados encontrados: ${resultadoInserir.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoInserir)}`); // transforma JSON em String
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
                 
                 }
@@ -46,9 +46,46 @@ function inserstats(req, res) {
     }
 
 }
+function listarTreinoMes(req,res){
+    let fk_usuario = req.params.fk_usuario;
+
+    
+
+
+    if (fk_usuario == undefined ) {
+        res.status(400).send("Sua fk_usuario está undefined!");
+    }else{
+
+        statsModel.listarTreinoMes(fk_usuario)
+            .then(
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+
+
+
+
+
+
+}
+
+
 
 
 
 module.exports = {
-    inserstats
+    inserstats,
+    listarTreinoMes
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="css/dashboards.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+
+<body onload="obterTreinoMes()">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -18,18 +20,18 @@
 
         <ul class="menu">
             <li><a href="dashboard.html" class="menu-item active" onclick="mostrarSecao('dashboard')">
-                <span class="icon">📊</span> Dashboard
-            </a></li>
+                    <span class="icon">📊</span> Dashboard
+                </a></li>
             <li><a href="calendario.html" class="menu-item" onclick="mostrarSecao('calendario')">
-                <span class="icon">📅</span> Calendário
-            </a></li>
+                    <span class="icon">📅</span> Calendário
+                </a></li>
             <li><a href="adicionar_jogo.html" class="menu-item" onclick="mostrarSecao('adicionar-jogo')">
-                <span class="icon">🎯</span> Adicionar Jogo
-            </a></li>
+                    <span class="icon">🎯</span> Adicionar Jogo
+                </a></li>
             <li><a href="galeria_fotos.html" class="menu-item" onclick="mostrarSecao('galeria')">
-                <span class="icon">📸</span> Galeria de Fotos
-            </a></li>
-            
+                    <span class="icon">📸</span> Galeria de Fotos
+                </a></li>
+
             <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
                 <span class="icon">📋</span> Histórico
             </a></li> -->
@@ -59,22 +61,16 @@
         <!-- SEÇÃO 1: DASHBOARD (GRÁFICOS) -->
         <!-- ========================================== -->
         <div id="secao-dashboard" class="secao ativa">
-            
+
             <div class="cards-resumo">
                 <div class="card-stat">
                     <div class="icon-stat">🏀</div>
                     <div class="info-stat">
                         <p class="label-stat">Treinos este mês</p>
-                        <h2 class="numero-stat">0</h2>
+                        <h2 class="numero-stat" id="id_treinos_mes">0</h2>
                     </div>
                 </div>
-                <div class="card-stat">
-                    <div class="icon-stat">🎯</div>
-                    <div class="info-stat">
-                        <p class="label-stat">Jogos disputados</p>
-                        <h2 class="numero-stat">0</h2>
-                    </div>
-                </div>
+
                 <div class="card-stat">
                     <div class="icon-stat">⭐</div>
                     <div class="info-stat">
@@ -113,6 +109,58 @@
 
     </div>
 
-    <script src="./js/dashboard.js"></script>
+
 </body>
+<script>
+    function obterTreinoMes() {
+        let fk_usuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/stats/listarTreinosMes/${fk_usuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+            .then(function (resposta) {
+
+                if (resposta.ok) {
+                    
+                    resposta.json().then(function (resposta) {
+                        console.log(`dados recebidos: ${JSON.stringify(resposta)}`)
+
+                        plotartreinomes(resposta)
+
+
+
+                    });
+                } else {
+                    throw "houve um erro ao tentar buscar stats de dia"
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`erro ao atualizar: ${resposta}`);
+            })
+    }
+    function plotartreinomes(resposta){
+        console.log(resposta)
+        let qtd_treinos = resposta[0].qnt_total_treino;
+
+        id_treinos_mes.innerHTML = qtd_treinos
+
+        console.log(qtd_treinos)
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
 </html>
