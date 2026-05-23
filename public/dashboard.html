@@ -130,8 +130,6 @@
 
                         plotartreinomes(resposta)
 
-
-
                     });
                 } else {
                     throw "houve um erro ao tentar buscar stats de dia"
@@ -141,11 +139,11 @@
                 console.log(`erro ao atualizar: ${resposta}`);
             })
     }
-    function plotartreinomes(resposta){
+    function plotarTreinoMes(resposta){
         console.log(resposta)
         let qtd_treinos = resposta[0].qnt_total_treino;
 
-        id_treinos_mes.innerHTML = qtd_treinos
+        id_treinos_mes.innerHTML = `${qtd_treinos}`
 
         console.log(qtd_treinos)
 
