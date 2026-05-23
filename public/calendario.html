@@ -12,7 +12,6 @@
 
 <body onload="verificar_ano_mes(),
 verificar_ano_bissexto(), 
-
 gerar_calendario()">
 
     <!-- SIDEBAR -->
@@ -23,24 +22,20 @@ gerar_calendario()">
         </div>
 
         <ul class="menu">
-            <li><a href="calendario.html" class="menu-item active" onclick="mostrarSecao('calendario')">
+            <li><a href="calendario.html" class="menu-item active">
                     <span class="icon">📅</span> Calendário
                 </a></li>
-            <li><a href="dashboard.html" class="menu-item " onclick="mostrarSecao('dashboard')">
+            <li><a href="dashboard.html" class="menu-item ">
                     <span class="icon">📊</span> Dashboard
                 </a></li>
-            <li><a href="adicionar_jogo.html" class="menu-item" onclick="mostrarSecao('adicionar-jogo')">
-                <span class="icon">🎯</span> Adicionar Jogo
-            </a></li>
-            <li><a href="galeria_fotos.html" class="menu-item" onclick="mostrarSecao('galeria')">
+            <li><a href="adicionar_jogo.html" class="menu-item">
+                    <span class="icon">🎯</span> Adicionar Jogo
+                </a></li>
+            <li><a href="galeria_fotos.html" class="menu-item">
                     <span class="icon">📸</span> Galeria de Fotos
                 </a></li>
 
-            <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
-                <span class="icon">📋</span> Histórico
-            </a></li> -->
         </ul>
-
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
             <div class="info-usuario">
@@ -61,7 +56,8 @@ gerar_calendario()">
             </div>
             <div class="header-actions">
                 <h1 id="titulo-secao">Ano :</h1>
-                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano" id="id_ano" name="Mês do ano">
+                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano"
+                    id="id_ano" name="Mês do ano">
                     <option value="2026">📅 2026</option>
                     <option value="2027">📅 2027</option>
                 </select>
@@ -69,7 +65,8 @@ gerar_calendario()">
 
             <div class="header-actions">
                 <h1 id="titulo-secao">Mês :</h1>
-                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano" id="id_mes" name="Mês do ano">
+                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano"
+                    id="id_mes" name="Mês do ano">
                     <option class="options_ano" value="janeiro">📅 Janeiro</option>
                     <option value="fevereiro">📅 Fevereiro</option>
                     <option value="marco">📅 Março</option>
@@ -110,7 +107,7 @@ gerar_calendario()">
         </div>
 
 
-        
+
     </div>
 
 
