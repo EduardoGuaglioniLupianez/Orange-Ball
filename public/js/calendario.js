@@ -150,15 +150,6 @@ function gerar_calendario() {
 
 
 
-
-
-
-
-
-
-
-
-
     console.log(qtd_dias_valor)
     if (bissexto == true) {
         if (json_ajuda_dias_semana[i].mes == "fevereiro") {
