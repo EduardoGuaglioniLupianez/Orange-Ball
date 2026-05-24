@@ -52,28 +52,7 @@
             </div>
         </div>
 
-        <!-- FORMULÁRIO DE JOGO -->
-        <div class="container-formulario">
 
-            <!-- SEÇÃO 1: INFORMAÇÕES DO JOGO -->
-            <div class="card-secao">
-                <h2 class="titulo-card">Informações do Jogo</h2>
-
-                <div class="linha-inputs">
-                    <div class="grupo-input">
-                        <label>Data do Jogo</label>
-                        <input type="date" id="data_jogo" required>
-                    </div>
-                    <div class="grupo-input">
-                        <label>Local</label>
-                        <input type="text" id="local_jogo" placeholder="Ex: Quadra do Bairro">
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
 
         <!-- SEÇÃO 2: ESTATÍSTICAS DO JOGO -->
         <div class="card-secao">
@@ -92,30 +71,30 @@
                     <label>Assistências (AST)</label>
                     <input type="number" id="id_ass" placeholder="0" min="0">
                 </div>
-                <div class="stat-box">
-                    <label>Bloqueios (BLK)</label>
-                    <input type="number" id="id_bloqueios" placeholder="0" min="0">
-                </div>
+                <div id="mensagem_erro"></div>
             </div>
 
             <div class="linha-inputs" style="margin-top: 20px;">
                 <div class="grupo-input">
-                    <label>Arremessos   |    Feitos / Tentados</label>
+                    <label>Arremessos de quadra | Feitos / Tentados</label>
                     <div class="input-duplo">
-                        <input type="number" id="arremessos_convertidos" placeholder="10" min="0">
+                        <input type="number" id="id_acertos" placeholder="10" min="0">
                         <span>/</span>
-                        <input type="number" id="arremessos_tentados" placeholder="20" min="0">
+                        <input type="number" id="id_tentativas" placeholder="20" min="0">
                     </div>
                 </div>
-                <div class="grupo-input">
-                    <label>Arremessos de 3   | Feitos / Tentados </label>
-                    <div class="input-duplo">
-                        <input type="number" id="tres_convertidos" placeholder="3" min="0">
-                        <span>/</span>
-                        <input type="number" id="tres_tentados" placeholder="8" min="0">
+                <div class="linha-inputs">
+                    <div class="grupo-input">
+                        <label>Local</label>
+                        <input type="text" id="id_local" placeholder="Ex: Quadra do Bairro">
+                    </div>
+                    <div class="grupo-input">
+                        <label>Horas jogadas</label>
+                        <input type="number" id="id_tempo" placeholder="Ex: 3" min="0">
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- SEÇÃO 3: DESCRIÇÃO E NOTAS -->
@@ -124,11 +103,10 @@
 
             <div class="grupo-input">
                 <label>Descrição / Notas do Jogo</label>
-                <textarea id="descricao_jogo" rows="6"
-                    placeholder="Como foi hoje o dia?"></textarea>
+                <textarea id="id_descricao" rows="6" placeholder="Como foi hoje o dia?"></textarea>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <input type="text" id="id_pts" placeholder="pts">
             <input type="text" id="id_ass" placeholder="ass">
             <input type="text" id="id_reb" placeholder="reb">
@@ -138,12 +116,7 @@
 
             <button onclick="inserir_stats()">POSTAR</button>
 
-
-
-
-
-
-        </div>
+        </div> -->
 
 
         <div class="card-secao">
@@ -173,7 +146,7 @@
 
         <!-- BOTÕES -->
         <div class="botoes-finais">
-            <button class="btn-salvar" onclick="salvarJogo()">
+            <button class="btn-salvar" onclick="inserir_stats()">
                 ✅ Salvar Jogo
             </button>
         </div>
@@ -185,7 +158,7 @@
     <script src="js/adicionar-jogo.js"></script>
 </body>
 <script>
-    p_nome.innerHTML= sessionStorage.NOME_USUARIO
+    p_nome.innerHTML = sessionStorage.NOME_USUARIO
 
     function inserir_stats() {
         var pts = id_pts.value;
@@ -193,6 +166,9 @@
         var reb = id_reb.value;
         var tentativas = id_tentativas.value;
         var acertos = id_acertos.value;
+        var descricao_jogo = id_descricao.value;
+        var local_jogo = id_local.value;
+        var tempo_horas = id_tempo.value;
         var idsessao = sessionStorage.ID_USUARIO;
         if (
             pts == "" ||
@@ -201,11 +177,11 @@
             tentativas == "" ||
             acertos == ""
         ) {
-            
+
             mensagem_erro.innerHTML =
                 "Algum campo está vazio tente novamente";
             return false;
-        } 
+        }
         // Enviando o valor da nova input
         fetch("/stats/inserstats", {
             method: "POST",
@@ -218,6 +194,9 @@
                 rebServer: reb,
                 tentativasServer: tentativas,
                 acertosServer: acertos,
+                localServer: local_jogo,
+                descricaoServer: descricao_jogo,
+                tempoServer:tempo_horas,
                 fkUsuarioServer: idsessao
             }),
         })
@@ -231,14 +210,14 @@
                         window.location = "adicionar_jogo.html";
                     }, "2000");
 
-                  
+
                 } else {
                     throw "Houve um erro ao tentar realizar o insert";
                 }
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-           
+
             });
 
         return false;

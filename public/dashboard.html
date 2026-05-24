@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="obterTreinoMes()">
+<body onload="carregarDashboard()">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
@@ -17,30 +17,24 @@
             <img src="public/assets/imgs/LogoOrangeballNova.png" alt="Logo">
             <h2>ORANGEBALL</h2>
         </div>
-
         <ul class="menu">
-            <li><a href="dashboard.html" class="menu-item active" onclick="mostrarSecao('dashboard')">
-                    <span class="icon">📊</span> Dashboard
-                </a></li>
-            <li><a href="calendario.html" class="menu-item" onclick="mostrarSecao('calendario')">
-                    <span class="icon">📅</span> Calendário
-                </a></li>
-            <li><a href="adicionar_jogo.html" class="menu-item" onclick="mostrarSecao('adicionar-jogo')">
-                    <span class="icon">🎯</span> Adicionar Jogo
-                </a></li>
-            <li><a href="galeria_fotos.html" class="menu-item" onclick="mostrarSecao('galeria')">
-                    <span class="icon">📸</span> Galeria de Fotos
-                </a></li>
-
-            <!-- <li><a href="#" class="menu-item" onclick="mostrarSecao('historico')">
-                <span class="icon">📋</span> Histórico
-            </a></li> -->
+            <li><a href="dashboard.html" class="menu-item active">
+                <span class="icon">📊</span> Dashboard
+            </a></li>
+            <li><a href="calendario.html" class="menu-item">
+                <span class="icon">📅</span> Calendário
+            </a></li>
+            <li><a href="adicionar_jogo.html" class="menu-item">
+                <span class="icon">🎯</span> Adicionar Jogo
+            </a></li>
+            <li><a href="galeria_fotos.html" class="menu-item">
+                <span class="icon">📸</span> Galeria de Fotos
+            </a></li>
         </ul>
-
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
             <div class="info-usuario">
-                <p class="nome-usuario">Jogador</p>
+                <p class="nome-usuario" id="nome-usuario">Jogador</p>
                 <a href="index.html" class="btn-sair">Sair</a>
             </div>
         </div>
@@ -49,116 +43,313 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <div class="conteudo-principal">
 
-        <!-- HEADER -->
         <div class="header-dashboard">
             <div class="titulo-pagina">
-                <h1 id="titulo-secao">Dashboard</h1>
-                <p id="subtitulo-secao">Visão geral do seu desempenho</p>
+                <h1>Dashboard</h1>
+                <p>Visão geral do seu desempenho</p>
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- SEÇÃO 1: DASHBOARD (GRÁFICOS) -->
-        <!-- ========================================== -->
         <div id="secao-dashboard" class="secao ativa">
 
+            <!-- KPI CARDS -->
             <div class="cards-resumo">
                 <div class="card-stat">
                     <div class="icon-stat">🏀</div>
                     <div class="info-stat">
                         <p class="label-stat">Treinos este mês</p>
-                        <h2 class="numero-stat" id="id_treinos_mes">0</h2>
+                        <h2 class="numero-stat" id="kpi-treinos">—</h2>
+                        <p class="label-stat" id="kpi-treinos-sub" style="font-size:11px; margin-top:4px;"></p>
                     </div>
                 </div>
-
                 <div class="card-stat">
                     <div class="icon-stat">⭐</div>
                     <div class="info-stat">
                         <p class="label-stat">Média de pontos</p>
-                        <h2 class="numero-stat">0.0</h2>
+                        <h2 class="numero-stat" id="kpi-pts">—</h2>
                     </div>
                 </div>
                 <div class="card-stat">
-                    <div class="icon-stat">📈</div>
+                    <div class="icon-stat">🎯</div>
                     <div class="info-stat">
-                        <p class="label-stat">Evolução</p>
-                        <h2 class="numero-stat">+0%</h2>
+                        <p class="label-stat">% de acerto</p>
+                        <h2 class="numero-stat" id="kpi-acerto">—</h2>
+                    </div>
+                </div>
+                <div class="card-stat">
+                    <div class="icon-stat">⏱️</div>
+                    <div class="info-stat">
+                        <p class="label-stat">Média horas/treino</p>
+                        <h2 class="numero-stat" id="kpi-tempo">—</h2>
                     </div>
                 </div>
             </div>
 
+            <!-- GRÁFICOS LINHA 1 -->
             <div class="graficos-container">
                 <div class="card-grafico">
-                    <h3>Desempenho nos Treinos</h3>
-                    <canvas id="graficoTreinos"></canvas>
+                    <h3>Pontos por Dia (este mês)</h3>
+                    <canvas id="graficoPontos"></canvas>
                 </div>
                 <div class="card-grafico">
-                    <h3>Pontos por Jogo</h3>
-                    <canvas id="graficoPontos"></canvas>
+                    <h3>Assistências e Rebotes (este mês)</h3>
+                    <canvas id="graficoAssReb"></canvas>
                 </div>
             </div>
 
+            <!-- GRÁFICOS LINHA 2 -->
             <div class="graficos-container">
-                <div class="card-grafico full-width">
-                    <h3>Evolução Mensal</h3>
+                <div class="card-grafico">
+                    <h3>Tentativas vs Acertos (este mês)</h3>
+                    <canvas id="graficoAcertos"></canvas>
+                </div>
+                <div class="card-grafico">
+                    <h3>Evolução últimos 3 meses</h3>
                     <canvas id="graficoEvolucao"></canvas>
                 </div>
             </div>
 
-        </div>
+            <!-- RADAR -->
+            <div class="graficos-container">
+                <div class="card-grafico full-width">
+                    <h3>Radar de Desempenho Geral</h3>
+                    <div style="max-width: 420px; margin: 0 auto;">
+                        <canvas id="graficoRadar"></canvas>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
 
+    <script>
+        var charts = {};
+
+        var corLaranja      = '#ff6b35';
+        var corLaranjaFill  = 'rgba(255,107,53,0.2)';
+        var corAzul         = '#378ADD';
+        var corAzulFill     = 'rgba(55,138,221,0.2)';
+        var corVerde        = '#639922';
+        var corVerdeFill    = 'rgba(99,153,34,0.2)';
+        var corRoxo         = '#7F77DD';
+        var corRoxoFill     = 'rgba(127,119,221,0.2)';
+        var corGrid         = 'rgba(255,255,255,0.05)';
+        var corTick         = '#b3b3b3';
+
+        var escalasPadrao = {
+            x: { ticks: { color: corTick }, grid: { color: corGrid } },
+            y: { ticks: { color: corTick }, grid: { color: corGrid } }
+        };
+
+        var legendaPadrao = {
+            labels: { color: corTick, font: { family: 'Barlow', size: 12 } }
+        };
+
+        function getId() {
+            return sessionStorage.ID_USUARIO || 1;
+        }
+
+        function get(url) {
+            return fetch(url).then(function(r) { return r.json(); });
+        }
+
+        function carregarDashboard() {
+            var id = getId();
+
+            // carrega KPIs em paralelo
+            Promise.all([
+                get('/stats/listarTreinosMes/' + id),
+                get('/stats/mediaPontos/' + id),
+                get('/stats/percentualAcerto/' + id),
+                get('/stats/mediaTempo/' + id)
+            ]).then(function(resultados) {
+                var treinos  = resultados[0][0];
+                var pts      = resultados[1][0];
+                var acerto   = resultados[2][0];
+                var tempo    = resultados[3][0];
+
+                document.getElementById('kpi-treinos').textContent = treinos.qtd_treino_mes_atual || 0;
+                document.getElementById('kpi-treinos-sub').textContent =
+                    'Mês passado: ' + (treinos.qtd_treino_mes_passado || 0);
+                document.getElementById('kpi-pts').textContent = pts.media_pts || '0.0';
+                document.getElementById('kpi-acerto').textContent = (acerto.pct_acerto || 0) + '%';
+                document.getElementById('kpi-tempo').textContent = (tempo.media_horas || 0) + 'h';
+            }).catch(function(e) { console.log('Erro KPIs:', e); });
+
+            // carrega dados dos gráficos
+            get('/stats/statsDiaMes/' + id).then(function(dados) {
+                plotarPontos(dados);
+                plotarAssReb(dados);
+                plotarAcertos(dados);
+            }).catch(function(e) { console.log('Erro statsDiaMes:', e); });
+
+            get('/stats/statsMeses/' + id).then(function(dados) {
+                plotarEvolucao(dados);
+            }).catch(function(e) { console.log('Erro statsMeses:', e); });
+
+            get('/stats/mediaGeral/' + id).then(function(dados) {
+                plotarRadar(dados[0]);
+            }).catch(function(e) { console.log('Erro mediaGeral:', e); });
+        }
+
+        function plotarPontos(dados) {
+            var ctx = document.getElementById('graficoPontos').getContext('2d');
+            if (charts.pontos) charts.pontos.destroy();
+            charts.pontos = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dados.map(function(d) { return d.dia; }),
+                    datasets: [{
+                        label: 'Pontos',
+                        data: dados.map(function(d) { return d.pontos; }),
+                        borderColor: corLaranja,
+                        backgroundColor: corLaranjaFill,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: corLaranja
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: legendaPadrao }, scales: escalasPadrao }
+            });
+        }
+
+        function plotarAssReb(dados) {
+            var ctx = document.getElementById('graficoAssReb').getContext('2d');
+            if (charts.assreb) charts.assreb.destroy();
+            charts.assreb = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dados.map(function(d) { return d.dia; }),
+                    datasets: [
+                        {
+                            label: 'Assistências',
+                            data: dados.map(function(d) { return d.assistencias; }),
+                            backgroundColor: corAzul,
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Rebotes',
+                            data: dados.map(function(d) { return d.rebotes; }),
+                            backgroundColor: corVerde,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: { responsive: true, plugins: { legend: legendaPadrao }, scales: escalasPadrao }
+            });
+        }
+
+        function plotarAcertos(dados) {
+            var ctx = document.getElementById('graficoAcertos').getContext('2d');
+            if (charts.acertos) charts.acertos.destroy();
+            charts.acertos = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dados.map(function(d) { return d.dia; }),
+                    datasets: [
+                        {
+                            label: 'Tentativas',
+                            data: dados.map(function(d) { return d.tentativas; }),
+                            backgroundColor: 'rgba(255,255,255,0.12)',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Acertos',
+                            data: dados.map(function(d) { return d.acertos; }),
+                            backgroundColor: corLaranja,
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: { responsive: true, plugins: { legend: legendaPadrao }, scales: escalasPadrao }
+            });
+        }
+
+        function plotarEvolucao(dados) {
+            var ctx = document.getElementById('graficoEvolucao').getContext('2d');
+            if (charts.evolucao) charts.evolucao.destroy();
+            charts.evolucao = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dados.map(function(d) { return d.mes; }),
+                    datasets: [
+                        {
+                            label: 'Média pts',
+                            data: dados.map(function(d) { return d.media_pts; }),
+                            borderColor: corLaranja,
+                            backgroundColor: corLaranjaFill,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: corLaranja
+                        },
+                        {
+                            label: 'Média reb',
+                            data: dados.map(function(d) { return d.media_reb; }),
+                            borderColor: corVerde,
+                            backgroundColor: corVerdeFill,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointBackgroundColor: corVerde
+                        },
+                        {
+                            label: 'Média ass',
+                            data: dados.map(function(d) { return d.media_ass; }),
+                            borderColor: corAzul,
+                            backgroundColor: corAzulFill,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointBackgroundColor: corAzul
+                        }
+                    ]
+                },
+                options: { responsive: true, plugins: { legend: legendaPadrao }, scales: escalasPadrao }
+            });
+        }
+
+        function plotarRadar(d) {
+            if (!d) return;
+            var ctx = document.getElementById('graficoRadar').getContext('2d');
+            if (charts.radar) charts.radar.destroy();
+
+            // normaliza pra 0-10: pts/40, ass/15, reb/15, acerto/100, horas/8
+            var normalizado = [
+                parseFloat((( d.media_pts   || 0) / 40  * 10).toFixed(1)),
+                parseFloat((( d.media_ass   || 0) / 15  * 10).toFixed(1)),
+                parseFloat((( d.media_reb   || 0) / 15  * 10).toFixed(1)),
+                parseFloat((( d.pct_acerto  || 0) / 100 * 10).toFixed(1)),
+                parseFloat((( d.media_horas || 0) / 8   * 10).toFixed(1))
+            ];
+
+            charts.radar = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Pontos', 'Assistências', 'Rebotes', '% Acerto', 'Horas'],
+                    datasets: [{
+                        label: 'Desempenho médio',
+                        data: normalizado,
+                        borderColor: corLaranja,
+                        backgroundColor: corLaranjaFill,
+                        borderWidth: 2,
+                        pointBackgroundColor: corLaranja
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: legendaPadrao },
+                    scales: {
+                        r: {
+                            min: 0, max: 10,
+                            ticks: { color: corTick, stepSize: 2, backdropColor: 'transparent' },
+                            grid: { color: 'rgba(255,255,255,0.08)' },
+                            pointLabels: { color: corTick, font: { family: 'Barlow', size: 13 } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 
 </body>
-<script>
-    function obterTreinoMes() {
-        let fk_usuario = sessionStorage.ID_USUARIO;
-
-        fetch(`/stats/listarTreinosMes/${fk_usuario}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            }
-        })
-            .then(function (resposta) {
-
-                if (resposta.ok) {
-                    
-                    resposta.json().then(function (resposta) {
-                        console.log(`dados recebidos: ${JSON.stringify(resposta)}`)
-
-                        plotartreinomes(resposta)
-
-                    });
-                } else {
-                    throw "houve um erro ao tentar buscar stats de dia"
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`erro ao atualizar: ${resposta}`);
-            })
-    }
-    function plotarTreinoMes(resposta){
-        console.log(resposta)
-        let qtd_treinos = resposta[0].qnt_total_treino;
-
-        id_treinos_mes.innerHTML = `${qtd_treinos}`
-
-        console.log(qtd_treinos)
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-</script>
-
 </html>
