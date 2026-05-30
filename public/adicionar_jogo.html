@@ -14,23 +14,23 @@
     <div class="sidebar">
         <div class="logo-sidebar">
             <img src="assets/imgs/LogoOrangeballNova.png" alt="Logo">
-            <h2>ORANGEBALL</h2>
+            <a href="index.html" class="icon">ORANGEBALL</a>
         </div>
 
-        <ul class="menu">
+        <div class="menu">
+            <li><a href="dashboard.html" class="menu-item">
+                    <img src="assets/imgs/dashboardicon.png" class="icon"></img> Dashboard
+                </a></li>
             <li><a href="adicionar_jogo.html" class="menu-item active">
-                    <span class="icon">🎯</span> Adicionar Jogo
+                    <img src="assets/imgs/adicionarjogo.png" class="icon"></img> Adicionar Jogo
                 </a></li>
             <li><a href="calendario.html" class="menu-item">
-                    <span class="icon">📅</span> Calendário
-                </a></li>
-            <li><a href="dashboard.html" class="menu-item">
-                    <span class="icon">📊</span> Dashboard
+                    <img src="assets/imgs/Calendarioicon.png" class="icon"></img> Calendário
                 </a></li>
             <li><a href="galeria_fotos.html" class="menu-item">
-                    <span class="icon">📸</span> Galeria de Fotos
+                    <img src="assets/imgs/galeria.png" class="icon"></img> Galeria de Fotos
                 </a></li>
-        </ul>
+        </div>
 
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
@@ -77,7 +77,7 @@
             <div class="linha-inputs" style="margin-top: 20px;">
                 <div class="grupo-input">
                     <label>Arremessos de quadra | Tentados / Feitos</label>
-                    <div class="input-duplo">                  
+                    <div class="input-duplo">
                         <input type="number" id="id_tentativas" placeholder="20" min="0">
                         <span>/</span>
                         <input type="number" id="id_acertos" placeholder="10" min="0">
@@ -196,7 +196,7 @@
                 acertosServer: acertos,
                 localServer: local_jogo,
                 descricaoServer: descricao_jogo,
-                tempoServer:tempo_horas,
+                tempoServer: tempo_horas,
                 fkUsuarioServer: idsessao
             }),
         })

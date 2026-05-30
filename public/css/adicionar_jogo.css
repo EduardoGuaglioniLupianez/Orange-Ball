@@ -49,8 +49,8 @@ body {
 }
 
 .logo-sidebar img {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  
 }
 
 .logo-sidebar h2 {
@@ -93,7 +93,12 @@ body {
 }
 
 .icon {
+  width: 20%;
+  margin-left: 1px;
+  color: var(--laranja);
   font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .perfil-usuario {
