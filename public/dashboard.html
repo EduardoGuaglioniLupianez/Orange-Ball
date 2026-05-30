@@ -156,7 +156,7 @@
         function carregarDashboard() {
             var id = getId();
 
-            // carrega KPIs em paralelo
+            // carrega KPIs 
             Promise.all([
                 get('/stats/listarTreinosMes/' + id),
                 get('/stats/mediaPontos/' + id),
