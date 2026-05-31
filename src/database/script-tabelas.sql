@@ -11,16 +11,23 @@ CREATE TABLE usuario (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE stats (	
-	id int auto_increment primary key,
-	pts int,
-    ass int,
-    reb int,
-    tentativas int,
-    acertos int,
-    fk_usuario int,
-    data_treino date,
-    constraint foreign key (fk_usuario) references usuario(id)
+CREATE TABLE stats (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pts INT,
+    ass INT,
+    reb INT,
+    tentativas INT,
+    acertos INT,
+    fk_usuario INT,
+    data_treino DATE,
+    imagem_url VARCHAR(255) NULL,
+    localidade VARCHAR(255) NULL,
+    descricao_dia TEXT NULL,
+    horas_jogadas INT NULL,
+    imagem LONGBLOB NULL,
+    CONSTRAINT fk_stats_usuario
+        FOREIGN KEY (fk_usuario)
+        REFERENCES usuario(id)
 );
 
 select * from usuario;

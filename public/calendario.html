@@ -4,41 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrangeBall | Dashboard</title>
+    <title>OrangeBall | Calendário</title>
     <link rel="stylesheet" href="css/calendario.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/calendario.js"></script>
 </head>
 
-<body onload="verificar_ano_mes(),
-verificar_ano_bissexto(), 
-gerar_calendario()">
+<body onload="verificar_ano_mes(), verificar_ano_bissexto(), gerar_calendario()">
 
     <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="logo-sidebar">
             <img src="assets/imgs/LogoOrangeballNova.png" alt="Logo">
-             <a href="index.html" class="icon">ORANGEBALL</a>
+            <a href="index.html" class="icon">ORANGEBALL</a>
         </div>
 
-         <div class="menu">
+        <div class="menu">
             <li><a href="dashboard.html" class="menu-item">
-                    <img src="assets/imgs/dashboardicon.png" class="icon"></img> Dashboard
+                    <img src="assets/imgs/dashboardicon.png" class="icon"> Dashboard
                 </a></li>
             <li><a href="adicionar_jogo.html" class="menu-item">
-                    <img src="assets/imgs/adicionarjogo.png" class="icon"></img> Adicionar Jogo
+                    <img src="assets/imgs/adicionarjogo.png" class="icon"> Adicionar Jogo
                 </a></li>
             <li><a href="calendario.html" class="menu-item active">
-                    <img src="assets/imgs/Calendarioicon.png" class="icon"></img> Calendário
-                </a></li>
-            <li><a href="galeria_fotos.html" class="menu-item">
-                    <img src="assets/imgs/galeria.png" class="icon"></img> Galeria de Fotos
+                    <img src="assets/imgs/Calendarioicon.png" class="icon"> Calendário
                 </a></li>
         </div>
+
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
             <div class="info-usuario">
-                <p class="nome-usuario">Jogador</p>
+                <p class="nome-usuario" id="p_nome">Jogador</p>
                 <a href="index.html" class="btn-sair">Sair</a>
             </div>
         </div>
@@ -50,23 +44,20 @@ gerar_calendario()">
         <!-- HEADER -->
         <div class="header-dashboard">
             <div class="titulo-pagina">
-                <h1 id="titulo-secao">Calendario</h1>
-                <p id="subtitulo-secao">Aqui você pode relembrar todos os seus momentos e stats!!!</p>
+                <h1>Calendário</h1>
+                <p>Aqui você pode relembrar todos os seus momentos e stats!</p>
             </div>
             <div class="header-actions">
-                <h1 id="titulo-secao">Ano :</h1>
-                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano"
-                    id="id_ano" name="Mês do ano">
+                <h1>Ano:</h1>
+                <select onchange="verificar_ano_mes(), verificar_ano_bissexto(), gerar_calendario()" class="select_ano" id="id_ano">
                     <option value="2026">📅 2026</option>
                     <option value="2027">📅 2027</option>
                 </select>
             </div>
-
             <div class="header-actions">
-                <h1 id="titulo-secao">Mês :</h1>
-                <select onchange="verificar_ano_mes(),verificar_ano_bissexto(),gerar_calendario()" class="select_ano"
-                    id="id_mes" name="Mês do ano">
-                    <option class="options_ano" value="janeiro">📅 Janeiro</option>
+                <h1>Mês:</h1>
+                <select onchange="verificar_ano_mes(), verificar_ano_bissexto(), gerar_calendario()" class="select_ano" id="id_mes">
+                    <option value="janeiro">📅 Janeiro</option>
                     <option value="fevereiro">📅 Fevereiro</option>
                     <option value="marco">📅 Março</option>
                     <option value="abril">📅 Abril</option>
@@ -82,12 +73,8 @@ gerar_calendario()">
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- SEÇÃO 1: calendario -->
-        <!-- ========================================== -->
+        <!-- CALENDÁRIO -->
         <div class="calendario">
-            <h2>Maio 2026</h2><br><br>
-
             <div class="dias-semana">
                 <div>Dom</div>
                 <div>Seg</div>
@@ -97,19 +84,52 @@ gerar_calendario()">
                 <div>Sex</div>
                 <div>Sáb</div>
             </div>
-
-            <div id="id_dias" class="dias">
-
-
-
-            </div>
+            <div id="id_dias" class="dias"></div>
         </div>
-
-
 
     </div>
 
+    <!-- MODAL DE DETALHES DO JOGO -->
+    <div class="modal_overlay" id="modal_overlay" onclick="fecharModalOverlay(event)">
+        <div class="modal_box">
+            <button class="modal_fechar" onclick="fecharModal()">✕</button>
+            <p class="modal_data" id="modal_data"></p>
+            <div class="modal_imagem_container">
+                <img id="modal_img" src="" alt="Foto do jogo" style="display:none;">
+                <div id="modal_sem_foto" class="modal_sem_foto">
+                    <span>📷</span>
+                    <p>Sem foto neste jogo</p>
+                </div>
+            </div>
+            <div class="modal_stats_grid">
+                <div class="modal_stat_item">
+                    <div class="modal_stat_label">PONTOS</div>
+                    <div class="modal_stat_valor" id="modal_pts">—</div>
+                </div>
+                <div class="modal_stat_item">
+                    <div class="modal_stat_label">REBOTES</div>
+                    <div class="modal_stat_valor" id="modal_reb">—</div>
+                </div>
+                <div class="modal_stat_item">
+                    <div class="modal_stat_label">ASSISTÊNCIAS</div>
+                    <div class="modal_stat_valor" id="modal_ass">—</div>
+                </div>
+                <div class="modal_stat_item">
+                    <div class="modal_stat_label">HORAS</div>
+                    <div class="modal_stat_valor" id="modal_horas">—</div>
+                </div>
+            </div>
+            <div class="modal_local" id="modal_local_wrapper" style="display:none;">
+                📍 <span id="modal_local"></span>
+            </div>
+            <div class="modal_descricao" id="modal_descricao"></div>
+        </div>
+    </div>
+
+    <script src="js/calendario.js"></script>
+    <script>
+        p_nome.innerHTML = sessionStorage.NOME_USUARIO
+    </script>
 
 </body>
-
 </html>

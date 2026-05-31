@@ -19,17 +19,15 @@
 
         <div class="menu">
             <li><a href="dashboard.html" class="menu-item">
-                    <img src="assets/imgs/dashboardicon.png" class="icon"></img> Dashboard
+                    <img src="assets/imgs/dashboardicon.png" class="icon"> Dashboard
                 </a></li>
             <li><a href="adicionar_jogo.html" class="menu-item active">
-                    <img src="assets/imgs/adicionarjogo.png" class="icon"></img> Adicionar Jogo
+                    <img src="assets/imgs/adicionarjogo.png" class="icon"> Adicionar Jogo
                 </a></li>
             <li><a href="calendario.html" class="menu-item">
-                    <img src="assets/imgs/Calendarioicon.png" class="icon"></img> Calendário
+                    <img src="assets/imgs/Calendarioicon.png" class="icon"> Calendário
                 </a></li>
-            <li><a href="galeria_fotos.html" class="menu-item">
-                    <img src="assets/imgs/galeria.png" class="icon"></img> Galeria de Fotos
-                </a></li>
+    
         </div>
 
         <div class="perfil-usuario">
@@ -52,9 +50,7 @@
             </div>
         </div>
 
-
-
-        <!-- SEÇÃO 2: ESTATÍSTICAS DO JOGO -->
+        <!-- SEÇÃO: ESTATÍSTICAS DO JOGO -->
         <div class="card-secao">
             <h2 class="titulo-card">Suas Estatísticas</h2>
 
@@ -71,7 +67,6 @@
                     <label>Assistências (AST)</label>
                     <input type="number" id="id_ass" placeholder="0" min="0">
                 </div>
-                <div id="mensagem_erro"></div>
             </div>
 
             <div class="linha-inputs" style="margin-top: 20px;">
@@ -95,9 +90,10 @@
                 </div>
             </div>
 
+            <div id="mensagem_erro" style="color: #ff4444; margin-top: 10px; font-weight: 600;"></div>
         </div>
 
-        <!-- como foi o jogo-->
+        <!-- SEÇÃO: COMO FOI O JOGO -->
         <div class="card-secao">
             <h2 class="titulo-card">Como foi o jogo?</h2>
 
@@ -106,122 +102,131 @@
                 <textarea id="id_descricao" rows="6" placeholder="Como foi hoje o dia?"></textarea>
             </div>
         </div>
-        <!-- <div>
-            <input type="text" id="id_pts" placeholder="pts">
-            <input type="text" id="id_ass" placeholder="ass">
-            <input type="text" id="id_reb" placeholder="reb">
-            <input type="text" id="id_tentativas" placeholder="tentativas">
-            <input type="text" id="id_acertos" placeholder="acertos"><br><br>
-            <div id="mensagem_erro"></div>
 
-            <button onclick="inserir_stats()">POSTAR</button>
-
-        </div> -->
-
-
+        <!-- SEÇÃO: FOTO -->
         <div class="card-secao">
-            <h2 class="titulo-card">Adicionar Fotos e Vídeos</h2>
+            <h2 class="titulo-card">Adicionar Fotos</h2>
 
             <div class="upload-container">
-                <div class="upload-box">
+                <div class="upload-box" onclick="document.getElementById('input_fotos').click()">
                     <div class="upload-icon">📷</div>
-                    <p class="upload-text">Clique para adicionar fotos</p>
-                    <span class="upload-info">JPG, PNG - Máx 5MB</span>
-                    <input type="file" id="input_fotos" accept="image/*" multiple style="display: none"
+                    <p class="upload-text">Clique para adicionar foto</p>
+                    <span class="upload-info">JPG, PNG — Máx 5MB</span>
+                    <input type="file" id="input_fotos" accept="image/*" style="display: none"
                         onchange="previewFotos(event)">
                 </div>
-
-                <div class="upload-box">
-                    <div class="upload-icon">🎥</div>
-                    <p class="upload-text">Clique para adicionar vídeos</p>
-                    <span class="upload-info">MP4, MOV - Máx 50MB</span>
-                    <input type="file" id="input_videos" accept="video/*" multiple style="display: none"
-                        onchange="previewVideos(event)">
-                </div>
+                <div id="preview_container" class="preview-container"></div>
             </div>
 
-            <!-- PREVIEW DAS MÍDIAS -->
-            <div id="preview_container" class="preview-container"></div>
-        </div>
+            <!-- MENSAGEM DE STATUS -->
+            <div id="mensagem_status" style="margin-top: 15px; font-weight: 600; font-size: 15px;"></div>
 
-        <!-- BOTÕES -->
-        <div class="botoes-finais">
-            <button class="btn-salvar" onclick="inserir_stats()">
-                ✅ Salvar Jogo
-            </button>
+            <!-- BOTÕES -->
+            <div class="botoes-finais">
+                <button class="btn-salvar" id="btn_salvar" onclick="inserir_stats()">
+                     Salvar Jogo
+                </button>
+            </div>
+
         </div>
 
     </div>
 
-    </div>
+    <script>
+        // Preenche nome do usuário na sidebar
+        document.getElementById('p_nome').innerHTML = sessionStorage.NOME_USUARIO || 'Jogador';
 
-    <script src="js/adicionar-jogo.js"></script>
-</body>
-<script>
-    p_nome.innerHTML = sessionStorage.NOME_USUARIO
+        // Guarda o Base64 da imagem escolhida (ou null se não tiver)
+        var imagemBase64Global = null;
 
-    function inserir_stats() {
-        var pts = id_pts.value;
-        var ass = id_ass.value;
-        var reb = id_reb.value;
-        var tentativas = id_tentativas.value;
-        var acertos = id_acertos.value;
-        var descricao_jogo = id_descricao.value;
-        var local_jogo = id_local.value;
-        var tempo_horas = id_tempo.value;
-        var idsessao = sessionStorage.ID_USUARIO;
-        if (
-            pts == "" ||
-            ass == "" ||
-            reb == "" ||
-            tentativas == "" ||
-            acertos == ""
-        ) {
+        // Preview da foto escolhida
+        function previewFotos(event) {
+            var arquivo = event.target.files[0];
+            if (!arquivo) return;
 
-            mensagem_erro.innerHTML =
-                "Algum campo está vazio tente novamente";
-            return false;
+            // Limita 5MB
+            if (arquivo.size > 5 * 1024 * 1024) {
+                document.getElementById('mensagem_erro').innerHTML = 'Imagem muito grande! Máximo 5MB.';
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                // Salva o Base64 globalmente para usar no fetch
+                imagemBase64Global = e.target.result;
+
+                // Exibe preview
+                var container = document.getElementById("preview_container");
+                container.innerHTML = `
+                    <div class="preview-item">
+                        <img src="${e.target.result}" alt="Preview">
+                        <button class="remover" onclick="removerFoto()">✕</button>
+                    </div>
+                `;
+            };
+            reader.readAsDataURL(arquivo); // converte para Base64
         }
-        // Enviando o valor da nova input
-        fetch("/stats/inserstats", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ptsServer: pts,
-                assServer: ass,
-                rebServer: reb,
-                tentativasServer: tentativas,
-                acertosServer: acertos,
-                localServer: local_jogo,
-                descricaoServer: descricao_jogo,
-                tempoServer: tempo_horas,
-                fkUsuarioServer: idsessao
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
 
-                if (resposta.ok) {
+        // Remove a foto escolhida
+        function removerFoto() {
+            imagemBase64Global = null;
+            document.getElementById("preview_container").innerHTML = "";
+            document.getElementById("input_fotos").value = "";
+        }
 
+        // Salva o jogo — tudo em um único fetch
+        function inserir_stats() {
+            var pts        = document.getElementById('id_pts').value;
+            var ass        = document.getElementById('id_ass').value;
+            var reb        = document.getElementById('id_reb').value;
+            var tentativas = document.getElementById('id_tentativas').value;
+            var acertos    = document.getElementById('id_acertos').value;
+            var descricao  = document.getElementById('id_descricao').value;
+            var local      = document.getElementById('id_local').value;
+            var tempo      = document.getElementById('id_tempo').value;
+            var idsessao   = sessionStorage.ID_USUARIO;
 
-                    setTimeout(() => {
-                        window.location = "adicionar_jogo.html";
-                    }, "2000");
+            // Validação básica
+            if (!pts || !ass || !reb || !tentativas || !acertos) {
+                document.getElementById('mensagem_erro').innerHTML = 'Preencha todos os campos obrigatórios!';
+                return;
+            }
 
+            document.getElementById('mensagem_erro').innerHTML = '';
+            document.getElementById('mensagem_status').innerHTML = '⏳ Salvando...';
+            document.getElementById('btn_salvar').disabled = true;
 
-                } else {
-                    throw "Houve um erro ao tentar realizar o insert";
-                }
+            // Envia tudo de uma vez — stats + imagem Base64 juntos
+            fetch("/stats/inserstats", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ptsServer:        pts,
+                    assServer:        ass,
+                    rebServer:        reb,
+                    tentativasServer: tentativas,
+                    acertosServer:    acertos,
+                    localServer:      local,
+                    descricaoServer:  descricao,
+                    tempoServer:      tempo,
+                    fkUsuarioServer:  idsessao,
+                    imagemBase64Server: imagemBase64Global  // null se não tiver foto
+                }),
             })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
+            .then(function (resposta) { return resposta.json(); })
+            .then(function (dados) {
+                document.getElementById('mensagem_status').innerHTML = '✅ Jogo salvo com sucesso!';
+                setTimeout(function () {
+                    window.location = "adicionar_jogo.html";
+                }, 1500);
+            })
+            .catch(function (erro) {
+                console.log("ERRO ao salvar jogo:", erro);
+                document.getElementById('mensagem_status').innerHTML = '❌ Erro ao salvar. Tente novamente.';
+                document.getElementById('btn_salvar').disabled = false;
             });
+        }
+    </script>
 
-        return false;
-    }
-</script>
-
+</body>
 </html>

@@ -197,7 +197,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 200px;
+  padding: 100px;
+  background-color: #050505;
+  border-radius: 100px;
+
 }
 
 .step {
@@ -230,10 +234,7 @@ a {
   color: var(--laranja);
 }
 
-/* CTA Final */
-.final-cta {
-  padding-bottom: 100px;
-}
+
 
 .cta-box {
   background: var(--cinza-card);

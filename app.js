@@ -18,10 +18,14 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var statsRouter = require("./src/routes/stats");
+var uploadsRouter = require("./src/routes/uploads");
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// aumenta o limite do express para poder passar o binario da imagem
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({
+  limit: '50mb',
+  extended: true
+}));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
@@ -30,6 +34,7 @@ app.use("/", indexRouter);
 
 app.use("/usuarios", usuarioRouter);
 app.use("/stats", statsRouter);
+app.use("/uploads", uploadsRouter);
 
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);

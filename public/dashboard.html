@@ -15,22 +15,20 @@
     <div class="sidebar">
         <div class="logo-sidebar">
             <img src="assets/imgs/LogoOrangeballNova.png" alt="Logo">
-             <a href="index.html" class="icon">ORANGEBALL</a>
+            <h2>ORANGEBALL</h2>
         </div>
-         <div class="menu">
+        <ul class="menu">
             <li><a href="dashboard.html" class="menu-item active">
-                    <img src="assets/imgs/dashboardicon.png" class="icon"></img> Dashboard
-                </a></li>
-            <li><a href="adicionar_jogo.html" class="menu-item">
-                    <img src="assets/imgs/adicionarjogo.png" class="icon"></img> Adicionar Jogo
-                </a></li>
+                <span class="icon">📊</span> Dashboard
+            </a></li>
             <li><a href="calendario.html" class="menu-item">
-                    <img src="assets/imgs/Calendarioicon.png" class="icon"></img> Calendário
-                </a></li>
-            <li><a href="galeria_fotos.html" class="menu-item">
-                    <img src="assets/imgs/galeria.png" class="icon"></img> Galeria de Fotos
-                </a></li>
-        </div>
+                <span class="icon">📅</span> Calendário
+            </a></li>
+            <li><a href="adicionar_jogo.html" class="menu-item">
+                <span class="icon">🎯</span> Adicionar Jogo
+            </a></li>
+           
+        </ul>
         <div class="perfil-usuario">
             <div class="avatar">👤</div>
             <div class="info-usuario">
@@ -99,13 +97,9 @@
 
             <!-- GRÁFICOS LINHA 2 -->
             <div class="graficos-container">
-                <div class="card-grafico">
+                <div class="card-grafico full-width">
                     <h3>Tentativas vs Acertos (este mês)</h3>
                     <canvas id="graficoAcertos"></canvas>
-                </div>
-                <div class="card-grafico">
-                    <h3>Evolução últimos 3 meses</h3>
-                    <canvas id="graficoEvolucao"></canvas>
                 </div>
             </div>
 
