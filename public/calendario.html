@@ -45,8 +45,10 @@
         <div class="header-dashboard">
             <div class="titulo-pagina">
                 <h1>Calendário</h1>
-                <p>Aqui você pode relembrar todos os seus momentos e stats!</p>
+                <p style="color: rgb(182, 63, 20);">Aqui você pode relembrar todos os seus momentos e stats</p>
+                <span ><p style="color: rgb(182, 63, 20);">Interaja com os dias do mês!</p></span>
             </div>
+           
             <div class="header-actions">
                 <h1>Ano:</h1>
                 <select onchange="verificar_ano_mes(), verificar_ano_bissexto(), gerar_calendario()" class="select_ano" id="id_ano">
@@ -94,13 +96,6 @@
         <div class="modal_box">
             <button class="modal_fechar" onclick="fecharModal()">✕</button>
             <p class="modal_data" id="modal_data"></p>
-            <div class="modal_imagem_container">
-                <img id="modal_img" src="" alt="Foto do jogo" style="display:none;">
-                <div id="modal_sem_foto" class="modal_sem_foto">
-                    <span>📷</span>
-                    <p>Sem foto neste jogo</p>
-                </div>
-            </div>
             <div class="modal_stats_grid">
                 <div class="modal_stat_item">
                     <div class="modal_stat_label">PONTOS</div>

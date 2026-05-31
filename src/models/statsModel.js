@@ -1,29 +1,20 @@
 var database = require("../database/config");
 
-// INSERT de nova stat COM imagem (BLOB)
-// imagemBuffer pode ser null se não tiver foto
-function inserir(pts, ass, reb, tentativas, acertos, local, descricao, tempo, fk_usuario, imagemBuffer) {
-    // Usamos prepared statement manual via array para o BLOB não quebrar
+// INSERT de nova stat
+function inserir(pts, ass, reb, tentativas, acertos, local, descricao, tempo, fk_usuario) {
     var instrucaoSql = `
-        INSERT INTO stats (pts, ass, reb, tentativas, acertos, localidade, descricao_dia, horas_jogadas, data_treino, fk_usuario, imagem)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)
+        INSERT INTO stats (pts, ass, reb, tentativas, acertos, localidade, descricao_dia, horas_jogadas, data_treino, fk_usuario)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)
     `;
-    var valores = [pts, ass, reb, tentativas, acertos, local || '', descricao || '', tempo, fk_usuario, imagemBuffer || null];
-    console.log("Executando INSERT de stat com imagem");
+    var valores = [pts, ass, reb, tentativas, acertos, local || '', descricao || '', tempo, fk_usuario];
+    console.log("Executando INSERT de stat");
     return database.executarComValores(instrucaoSql, valores);
-}
-
-// Busca imagem de uma stat pelo id (retorna só o campo imagem)
-function buscarImagem(id) {
-    var instrucaoSql = `SELECT imagem FROM stats WHERE id = ?`;
-    return database.executarComValores(instrucaoSql, [id]);
 }
 
 // Busca stats de um dia específico (para o calendário/modal)
 function buscarPorData(fk_usuario, data) {
     var instrucaoSql = `
-        SELECT id, pts, ass, reb, tentativas, acertos, localidade, descricao_dia, horas_jogadas,
-               CASE WHEN imagem IS NOT NULL THEN 1 ELSE 0 END AS tem_imagem
+        SELECT id, pts, ass, reb, tentativas, acertos, localidade, descricao_dia, horas_jogadas
         FROM stats
         WHERE fk_usuario = ?
         AND DATE(data_treino) = ?
@@ -155,7 +146,6 @@ function mediaGeral(fk_usuario) {
 
 module.exports = {
     inserir,
-    buscarImagem,
     buscarPorData,
     buscarDatasComJogo,
     listarTreinoMes,

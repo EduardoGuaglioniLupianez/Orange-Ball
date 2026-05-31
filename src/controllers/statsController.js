@@ -1,6 +1,6 @@
 var statsModel = require("../models/statsModel");
 
-// POST — inserir nova stat COM imagem (tudo em uma única chamada)
+// POST — inserir nova stat
 function inserstats(req, res) {
     var pts        = req.body.ptsServer;
     var ass        = req.body.assServer;
@@ -12,27 +12,11 @@ function inserstats(req, res) {
     var tempo      = req.body.tempoServer      || 0;
     var fk_usuario = req.body.fkUsuarioServer;
 
-    // Imagem vem como string Base64 (ex: "data:image/jpeg;base64,/9j/4AA...")
-    var imagemBase64 = req.body.imagemBase64Server || null;
-
     if (!pts || !ass || !reb || !tentativas || !acertos || !fk_usuario) {
         return res.status(400).json({ mensagem: "Campos obrigatórios faltando!" });
     }
 
-    // Converte Base64 para Buffer (binário) para salvar como BLOB
-    var imagemBuffer = null;
-    if (imagemBase64) {
-        try {
-            // Remove o prefixo "data:image/jpeg;base64," e converte para Buffer
-            var base64Pura = imagemBase64.replace(/^data:image\/\w+;base64,/, "");
-            imagemBuffer = Buffer.from(base64Pura, "base64");
-        } catch (e) {
-            console.log("Erro ao converter Base64 para Buffer:", e);
-            imagemBuffer = null;
-        }
-    }
-
-    statsModel.inserir(pts, ass, reb, tentativas, acertos, local, descricao, tempo, fk_usuario, imagemBuffer)
+    statsModel.inserir(pts, ass, reb, tentativas, acertos, local, descricao, tempo, fk_usuario)
         .then(function (resultado) {
             res.status(201).json({ mensagem: "Jogo salvo com sucesso!", id: resultado.insertId });
         })

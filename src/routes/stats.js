@@ -1,9 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var statsController = require("../controllers/statsController");
-var statsModel = require("../models/statsModel");
 
-// POST — inserir nova stat (agora recebe imagem junto)
+// POST — inserir nova stat
 router.post("/inserstats", function (req, res) {
     statsController.inserstats(req, res);
 });
@@ -18,27 +17,6 @@ router.get("/porData/:fk_usuario/:data", function (req, res) {
 // Exemplo: /stats/datasComJogo/1/2026/5
 router.get("/datasComJogo/:fk_usuario/:ano/:mes", function (req, res) {
     statsController.buscarDatasComJogo(req, res);
-});
-
-// GET — serve a imagem de uma stat como resposta de imagem (src do <img>)
-// Exemplo: /stats/imagem/7
-router.get("/imagem/:id", function (req, res) {
-    var id = req.params.id;
-
-    statsModel.buscarImagem(id)
-        .then(function (resultado) {
-            if (resultado.length === 0 || !resultado[0].imagem) {
-                return res.status(404).send("Imagem não encontrada");
-            }
-
-            // Envia o Buffer como resposta de imagem (o navegador exibe direto)
-            res.setHeader("Content-Type", "image/jpeg");
-            res.send(resultado[0].imagem);
-        })
-        .catch(function (erro) {
-            console.log("Erro ao buscar imagem:", erro);
-            res.status(500).send("Erro interno");
-        });
 });
 
 // GET — KPI: treinos do mês atual vs mês passado
