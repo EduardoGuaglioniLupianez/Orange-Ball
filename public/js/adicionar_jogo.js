@@ -49,6 +49,8 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
+                    mensagem_status.innerHTML = "Dia Inserido com sucesso!!"
+
 
 
                     setTimeout(() => {
