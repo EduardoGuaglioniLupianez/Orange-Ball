@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrangeBall | Dashboard</title>
     <link rel="stylesheet" href="css/dashboards.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -19,20 +20,20 @@
         </div>
 
         <div class="menu">
+             <li><a href="adicionar_jogo.html" class="menu-item">
+                    <img src="assets/imgs/adicionarjogo.png" class="icon"> Adicionar Jogo
+                </a></li>
             <li><a href="dashboard.html" class="menu-item active">
                     <img src="assets/imgs/dashboardicon.png" class="icon"> Dashboard
                 </a></li>
-            <li><a href="adicionar_jogo.html" class="menu-item">
-                    <img src="assets/imgs/adicionarjogo.png" class="icon"> Adicionar Jogo
-                </a></li>
+           
             <li><a href="calendario.html" class="menu-item">
                     <img src="assets/imgs/Calendarioicon.png" class="icon"> Calendário
                 </a></li>
     
         </div>
 
-        <div class="perfil-usuario">
-            <div class="avatar">👤</div>
+       <div class="perfil-usuario">
             <div class="info-usuario">
                 <p class="nome-usuario" id="p_nome">Jogador</p>
                 <a href="index.html" class="btn-sair">Sair</a>
@@ -119,6 +120,8 @@
     </div>
 
     <script>
+         p_nome.innerHTML = sessionStorage.NOME_USUARIO
+
         var charts = {};
 
         var corLaranja      = '#ff6b35';

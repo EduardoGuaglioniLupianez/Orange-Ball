@@ -29,7 +29,6 @@ body {
 
 }
 
-
 .header {
   height: var(--tamanho-header);
   background: linear-gradient(135deg, var(--preto) 0%, var(--cinza-escuro) 100%);
@@ -64,14 +63,16 @@ body {
   font-weight: 800;
   color: var(--laranja-principal) !important;
 }
-
+.btn-login {
+  border: 1px solid var(--laranja-principal);
+  padding: 8px 20px;
+  border-radius: 5px;
+}
 .navbar {
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   list-style: none;
-  color: var(--cinza-claro);
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .titulo {
@@ -507,48 +508,7 @@ input {
   width: 50px;
 }
 
-/* ALERTA */
 
-#alerta {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-
-.mensagem-alarme {
-  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
-  border-radius: 12px;
-  border-left: 5px solid var(--laranja-principal);
-  width: 300px;
-  height: 80px;
-  margin: 10px;
-  padding: 10px 15px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.mensagem-alarme h3 {
-  font-size: 14px;
-  margin: 0;
-  color: var(--cinza-escuro);
-}
-
-.mensagem-alarme .informacao {
-  width: 66%;
-}
-
-.alarme-sino {
-  width: 48px;
-  height: 48px;
-  animation-name: bell;
-  animation-duration: 4s;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/1157/1157000.png');
-  background-size: cover;
-  animation-iteration-count: infinite;
-  filter: sepia(100%) saturate(300%) hue-rotate(350deg);
-}
 
 @keyframes bell {
   0% {

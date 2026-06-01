@@ -20,11 +20,9 @@ CREATE TABLE stats (
     acertos INT,
     fk_usuario INT,
     data_treino DATE,
-    imagem_url VARCHAR(255) NULL,
     localidade VARCHAR(255) NULL,
     descricao_dia TEXT NULL,
     horas_jogadas INT NULL,
-    imagem LONGBLOB NULL,
     CONSTRAINT fk_stats_usuario
         FOREIGN KEY (fk_usuario)
         REFERENCES usuario(id)

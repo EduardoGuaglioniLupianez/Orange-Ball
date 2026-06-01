@@ -52,11 +52,11 @@ body {
   border-bottom: 1px solid var(--cinza-borda);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1px;
 }
 
 .logo-sidebar img {
-  width: 40px;
+  width: 70px;
   height: 40px;
 }
 

@@ -43,20 +43,21 @@ body {
   border-bottom: 1px solid var(--cinza-borda);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1px;
 }
 
 .logo-sidebar img {
-  width: 40px;
+  width: 70px;
   height: 40px;
 }
 
 .icon {
-  width: 20px;
-  text-decoration: none;
+  width: 20%;              
+  margin-left: 1px;
   color: var(--laranja);
   font-weight: 800;
   font-size: 20px;
+  text-decoration: none;
 }
 
 .menu {
@@ -203,11 +204,13 @@ body {
 .dia_button {
   background: #f35c25;
   color: white;
+  
 }
 
 .dia_button_sem_treino {
   background: #A34E22;
   color: white;
+ 
 }
 
 .dia_button:hover,
