@@ -178,7 +178,6 @@ a {
 
 /* Como Funciona */
 .how-it-works {
-  padding: 100px 0;
   text-align: center;
 }
 
@@ -198,9 +197,9 @@ a {
   justify-content: center;
   align-items: center;
   gap: 200px;
-  padding: 100px;
-  background-color: #050505;
-  border-radius: 100px;
+  padding: 30px;
+  
+  
 
 }
 
